@@ -1,0 +1,19 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: web-application
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
+logging:
+  level:
+    root: INFO
+limiter:
+  redis:
+    limiterinfos:
+      - key: "someKey1"
+        maxpermits: 100
+        rate: 1.0

@@ -1,0 +1,16 @@
+# nginx 漏桶
+# 配置文件中 定义限流规则 
+# 将每个相同客户端ip的请求限制在每分钟6次
+limit_req_zone $binary_remote_addr zone=perip:10m rate=6r/m;
+# 将同一个虚拟主机的请求限制在每秒10次
+limit_req_zone $server_name zone=perserver:1m rate=10r/s;
+#具体server配置中
+server{
+  ...
+  # 应用限流规则
+  limit_req zone=perip;
+  limit_req zone=perserver;
+  ...
+}
+
+# nignx 令牌
